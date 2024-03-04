@@ -6,7 +6,7 @@
 4. Screen Readers (Voice Over in Mac)
 
 ### Usability
-- Avoid using technical language and many people don't understand it.
+- Avoid using technical language/jargon in text. Keep it as simple as possible.
 - Plain language is good usability (avoid technical Jargon if possible)
 - Character sets and Fonts should be chosen so that they contain all the characters that are used in the language.
 - For Audio and Video, subtitles, captions or transcripts should be provided. Use case: Noisy Places, Deaf people, people with hearing loss, people who are not fluent in the language spoken in the videos.
