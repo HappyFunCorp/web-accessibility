@@ -52,3 +52,20 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 #### Keyboard focus vs Visual focus
 - Keyboard focus is the element that is currently selected by the keyboard. Visual focus is the element that is currently highlighted on the screen. Sometimes, these are out of sync. This can be confusing for people who rely on keyboard navigation. 
 
+#### Focus and Hover Styles
+- While using keyboard navigation, focus styles allow users to know which element is currently selected. For people with motor disabilities, it is difficult to use mouse. They rely on keyboard navigation. Focus styles are important for them.
+- Its a quite common practice to remove focus styles as they do not generally match the design. This is a bad practice. Why not make the focus styles match the design or make them even more prominent?
+- Hover styles giive visual feedback to users when they hover over an element. This is not available to keyboard users. Avoid using hover styles for non-interactive elements like div/span. It could be confusing for screen readers.s
+
+#### Tab Index
+- In keyboard navigation, if tabkey is used to navigate the page, then tabindex determines the order of focus. By default, tabindex is 0. It means that the element will be focused in the order it appears in the DOM. If tabindex is set to -1, then the element will not be focused by tab key. If tabindex is set to a positive number, then the element will be focused in the order of the number.
+- However, if cursor keys are used to navigate the page, then tabindex is ignored.
+- Because of these inconsistencies, it is better to avoid using tabindex.
+- Using tabindex on non-interactive elements like div/span is a bad practice. It could be confusing for screen readers.
+- Instead of using tabindex, attempt should be made toowards a properly structured HTML. This will ensure that the tab order is logical and consistent with the visual order.
+
+#### WYSIWYG Editors
+- WYSIWYG editors are used to create content. They are used to create content in a way that is visually appealing. However, they can create accessibility issues. For example, they can create nested tables, which can be difficult to navigate for screen readers. They can also create inaccessible forms. It is important to test the content created by WYSIWYG editors for accessibility.
+
+#### Web Accessibility Initiative—Accessible Rich Internet Applications (WAI-ARIA)
+- todo
