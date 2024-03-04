@@ -78,8 +78,8 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 
   List of roles: https://www.w3.org/TR/wai-aria-1.1/#roles_categorization
 
- #### Landmarks
+  #### Landmarks
   - Landmarks are roles that help assistive technologies to understand the role of different sections of the page and their relationship to each other. For example, a header, a footer, a main content area, a navigation area, etc.
   - If you already using HTML5 semantic elements like `<header>`, `<footer>`, `<main>`, `<nav>`, `<aside>`, `<section>`, then you do not need to use ARIA landmarks. These elements already have implicit roles.
   
- #### States and Properties
+  #### States and Properties
