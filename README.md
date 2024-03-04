@@ -68,4 +68,18 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 - WYSIWYG editors are used to create content. They are used to create content in a way that is visually appealing. However, they can create accessibility issues. For example, they can create nested tables, which can be difficult to navigate for screen readers. They can also create inaccessible forms. It is important to test the content created by WYSIWYG editors for accessibility.
 
 #### Web Accessibility Initiative—Accessible Rich Internet Applications (WAI-ARIA)
-- todo
+- Web and Markup languages were initially designed keeping document oriented design in mind. However, since then, web apps have grown complex/desktop like / more and more component based. 
+- WAI-ARIA allows thesse components and widgets to be accessible to screen readers and other assistive technologies.
+- ARIA roles, states and properties can be used to make custom components accessible by describing their behavior and structure to assistive technologies.
+  #### Roles
+  - Most HTML elements have implicit roles (like button, link, etc). Browsers and assistive technologies understand these implicit roles. For example, an `<a>` tag has an implicit role of link which tells the browser and assistive technologies that this bit of HTML is not just text, but is an interactive element that can be clicked. 
+  - However, there are some elements that do not have implicit roles. For example, a `<div>` tag. It is just a container. It does not have any implicit role. In such cases, ARIA roles can be used to give the element a role.
+  - ```<div role="alert">``` This tells the browser and assistive technologies that this div is an alert. It should be announced as an alert and not just as a div.
+
+  List of roles: https://www.w3.org/TR/wai-aria-1.1/#roles_categorization
+
+ #### Landmarks
+  - Landmarks are roles that help assistive technologies to understand the role of different sections of the page and their relationship to each other. For example, a header, a footer, a main content area, a navigation area, etc.
+  - If you already using HTML5 semantic elements like `<header>`, `<footer>`, `<main>`, `<nav>`, `<aside>`, `<section>`, then you do not need to use ARIA landmarks. These elements already have implicit roles.
+  
+ #### States and Properties
