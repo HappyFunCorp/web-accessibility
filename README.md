@@ -13,6 +13,8 @@
 - All foreground and background colors should have sufficient contrast, making it easier for people with low vision to read the content.
 - Keyboard/Screen Reader Navigation should be possible.
 
+### References
+https://almanac.httparchive.org/en/2022/accessibility
 
 ### ADA
 https://webaim.org/blog/the-ada-and-the-web-concerns-and-misconceptions/
@@ -23,6 +25,60 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 
  
 ### HTML
+#### Lang attribute
+```<html lang="en">```
+- The lang attribute is used to specify the primary language for the document. It is important for screen readers to announce the content in the correct language. Lacking the lang attribute, screen readers will assume the language based on the user's settings. This can lead to incorrect pronunciation of words and phrases, bad translations, and other formatting issues.
+- Lang attribute can be used on the html tag, or on the specific elements like p, h1, etc.
+
+```
+  <p lang="en">
+    The Alchemist is a novel written by Brazilian author <span lang="es">
+    Paulo Coelho</span>, originally published in Portuguese in 1988.
+  </p>
+```
+  - Screen readers that support multiple languages adapt their pronounciation and accent based on the lang attribute. A page with German content but lang set to "en" could end up being pronounced in English accent which could result into hard to understand pronounciation (or even wrong).
+  - Certain tags like `<q>` behave differently based on the lang attribute. For example, in English, quotes are represented by double quotes. In French, quotes are represented by guillemets. The lang attribute helps the browser to render the quotes correctly.
+  ```html
+    <p lang="en">
+      <q>quotes are represented as</q>
+    </p>
+  <!-- Results in: “quotes are represented as” -->
+  ```
+  ```html
+    <p lang="en">
+      <q>les citations sont représentées comme</q>
+    </p>
+    <!-- Results in: „les citations sont représentées comme“ -->
+  ```
+  - Browser may select language specific fonts based on the lang attribute. 
+  - SEO: lang attribute could also help search engines understand content better. 
+
+#### Page Title
+- `<title>` of page must be unique and should describe the content of the page. It is the first thing that screen readers announce when the page is loaded. It is also used by search engines to understand the content of the page.
+- Additionally, opengraph meta tag can be used to include catchier title for social media previews.
+```html
+  <head>
+    <title>Web Accessibility</title>
+    <meta property="og:title" content="Web Accessibility - A Comprehensive Guide">
+  </head>
+```
+- Screen reader users often use shortcut keys to anounce the title of the page. So, even for SPA's where the title does not change, it is important to update the title when the content changes.
+- Titles becomes labels for bookmarks.
+- Titles should be unique, concise and should contain relevant information first. For ex: "Website Name: Page Name" is a bad practice. "Page Name - Website Name" is a better practice.
+- Titles should be less than 60 characters. This is because search engines truncate titles longer than 60 characters.
+- Additional context can be provided for example if a page is part of flow, then title could include step number and step description.
+
+#### Viewport Meta Tag & Low Vision
+- Viewport is the rectangular area in which root element `<html>` is contained.
+- Users with low vision often use zoom to increase the size of the content. If viewport meta tag settings don't allow zooming, then it could be difficult for users with low vision to read the content.
+```html
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+```
+- Avoid using restrictive viewport settings like `user-scalable=no` or `user-scalable=0`. 
+- Setting `width=device-width` ensures that the content fits the screen width. Avoid using hardcoded/fixed width settings, as it could cause overflow problems if the screen width is smaller than the fixed width.
+- `maximum-scale` and `minimum-scale` can be used to limit the zooming. However, it is better to avoid using these settings. Users with low vision might need to zoom in more than the maximum-scale setting.
+  - https://almanac.httparchive.org/en/2022/accessibility#zooming-and-scaling
+
 
 #### Headings
 - Sensible usage of heading tags to organise content. Heading h1,h2,h3.. describes structure of content to screen readers. Without hierarchy, it would take longer to navigate through the content or locate the desired information.
@@ -83,3 +139,15 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
   - If you already using HTML5 semantic elements like `<header>`, `<footer>`, `<main>`, `<nav>`, `<aside>`, `<section>`, then you do not need to use ARIA landmarks. These elements already have implicit roles.
   
   #### States and Properties
+  - ARIA states and properties give additional information about the widgets/components to assistive technologies. For example: aria-expanded, aria-checked, aria-disabled, aria-hidden, aria-invalid, aria-pressed, aria-selected, aria-label, aria-labelledby, aria-describedby, etc.
+    - aria-describedby can tell the screen reader to read the content of the element with the id mentioned in the aria-describedby attribute and consider it as description of the element.
+  
+  #### Live Regions
+  - ARIA live regions are used to announce dynamic content changes to screen readers. For example, a chat application where new messages are added dynamically. ARIA live regions can be used to announce the new messages to screen readers.
+    - aria-live="polite" - The screen reader will announce the change gracefully (without people to lose focus on their current activity). For example: when user is idle/stops typing.
+    - aria-live="assertive" - The screen reader will announce the change immediately.
+    - aria-live="off" - The screen reader will not announce the change.
+
+ #### ARIA Support
+  - ARIA is not supported by all screen readers. It is important to test the ARIA roles, states and properties with different screen readers.
+  - ARIA won't fix bad HTML. It is not a substitute for good structure. Inherent HTML semantics far outweigh the use of ARIA. ARIA should be used in conjunction with good HTML structure. 
