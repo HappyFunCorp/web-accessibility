@@ -4,6 +4,7 @@
 2. https://www.nvaccess.org
 3. CSS less mode in browser
 4. Screen Readers (Voice Over in Mac)
+5. ct.css is a little diagnostic snippet, named after Computed Tomography (CT) scans, that exposes potential performance issues in your page’s <head> tags, and will disappear as soon as you’ve fixed them. https://csswizardry.com/ct/
 
 ### Usability
 - Avoid using technical language/jargon in text. Keep it as simple as possible.
@@ -99,6 +100,36 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
   <input type="text" id="username" name="username">
   ```
 - Certain inputs like radio buttons have very small interaction area. Pairing the input with the label increases the interaction area. It reduces the chances of selecting the wrong input. Increasing the interactive area helps people with motor disabilities, where they might have difficulty in clicking on small areas.
+- Important forms on page should be promoted as landmarks. This helps screen reader users to jump to the form directly. Examples: 
+- Login form:
+  ```html
+  <form role=form"" aria-label="Login">
+    <label for="username">Username (required)</label>
+    <input type="text" id="username" name="username">
+    <label for="password">Password (required)</label>
+    <input type="password" id="password" name="password">
+    <button type="submit">Login</button>
+  </form>
+  ```
+- Search form:
+  ```html
+  <form role="search" aria-label="Search">
+    <label for="search">Search</label>
+    <input type="text" id="search" name="search">
+    <button type="submit">Search</button>
+  </form>
+  ```
+  OR
+  ```html
+  <search role="search">
+    <form>
+      <label for="search">Search</label>
+      <input type="text" id="search" name="search">
+      <button type="submit">Search</button>
+    </form>
+  </search>
+  ```
+
 
 #### Keyboard Shortcuts
   https://www.digitaltrends.com/wp-content/uploads/2022/05/gmail-navigate-keyboard-shortcuts.jpg?fit=720%2C720&p=1
@@ -134,10 +165,6 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 
   List of roles: https://www.w3.org/TR/wai-aria-1.1/#roles_categorization
 
-  #### Landmarks
-  - Landmarks are roles that help assistive technologies to understand the role of different sections of the page and their relationship to each other. For example, a header, a footer, a main content area, a navigation area, etc.
-  - If you already using HTML5 semantic elements like `<header>`, `<footer>`, `<main>`, `<nav>`, `<aside>`, `<section>`, then you do not need to use ARIA landmarks. These elements already have implicit roles.
-  
   #### States and Properties
   - ARIA states and properties give additional information about the widgets/components to assistive technologies. For example: aria-expanded, aria-checked, aria-disabled, aria-hidden, aria-invalid, aria-pressed, aria-selected, aria-label, aria-labelledby, aria-describedby, etc.
     - aria-describedby can tell the screen reader to read the content of the element with the id mentioned in the aria-describedby attribute and consider it as description of the element.
@@ -151,3 +178,132 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
  #### ARIA Support
   - ARIA is not supported by all screen readers. It is important to test the ARIA roles, states and properties with different screen readers.
   - ARIA won't fix bad HTML. It is not a substitute for good structure. Inherent HTML semantics far outweigh the use of ARIA. ARIA should be used in conjunction with good HTML structure. 
+
+  #### Landmarks
+  - Landmarks are roles that help assistive technologies to understand the role of different sections of the page and their relationship to each other. For example, a header, a footer, a main content area, a navigation area, etc.
+  - Landmarks help with high level semantics of page and group common sitewide and page specific elements. It helps screen readers to understand the structure of the page.
+  - Screen reader may announce landmark when user enters or leaves it. Every item of page should live inside a landmark so that it can be discovered by user.
+  - Users can jump from landmark to landmark using keyboard shortcuts or gestures and skip to specific areas without interacting with rest of the page. 
+
+    | Screen Reader            | Command          |
+    |--------------------------|------------------|
+    | NVDA                     | D                |
+    | JAWS                     | R                |
+    | Narrator                 | D                |
+    | VoiceOver on iOS         | Rotor            |
+    | TalkBack on Android      | Reading Controls |
+
+  - Landmarks can be explicitly defined using `role` attribute. For example: `<div role="main">`, `<div role="navigation">`, `<div role="search">`, `<div role="complementary">`, `<div role="contentinfo">`, etc.
+  - Some implicit landmarks are: `<header>`, `<footer>`, `<nav>`, `<main>`, `<aside>`, `<section>`, `<article>`, etc.
+
+    ##### HTML Landmarks and their ARIA roles
+    | Element | ARIA Role     | Conditions                                                             |
+    |---------|---------------|------------------------------------------------------------------------|
+    | header  | banner        | Only in the context of the body element; not when a descendant of `<article>, <aside>, <main>, <nav>, or <section>`.  |
+    | nav     | navigation    |                                                                        |
+    | main    | main          |                                                                        |
+    | section | region        | When it has an accessible name using `aria-labelledby, aria-label, or title`. |
+    | form    | form          | When it has an accessible name using `aria-labelledby, aria-label, or title`. |
+    | form    | search        | With `role="search"`                                                    |
+    | search  | search        |                                                                        |
+    | aside   | complementary |                                                                        |
+    | footer  | contentinfo   | Only in the context of the body element; not when a descendant of `<article>, <aside>, <main>, <nav>, or <section>`.  |
+
+
+  - `banner` - Typically the top of the page, containing the site's branding, logo, and primary navigation. Multiple `<header>` elements (if nested) can be used in a page, but only one should have the `banner` role.
+  - `main` - The main content of the page. Multiple `<main>` elements can be used in a page, but only one should be visible at a time. Main represents core content of the page.
+  - `contentinfo` - Footer typically contains secondary navigation, copyright info etc. Multiple nested footers are fine in a page, but there must be only one `contentinfo` role.
+  
+  #### Main Navigation Landmark Example:
+  ```html
+    <header>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/products" aria-current="page">Products</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+  ```
+  #### Breadcrumb Navigation Example:
+  ```html
+    <nav aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/products/">Products</a></li>
+        <li><a href="/products/kitchen/">Kitchen & appliances</a></li>
+        <li><a href="/products/kitchen/" aria-current="page">Kitchen worktops</a></li>
+      </ol>
+    </nav>
+  ```
+  #### Local Navigation Example:
+  ```html
+    <nav aria-label="Contents">
+      <ol>
+        <li><a href="#company">Company</a></li>
+        <li><a href="#licensing">Licensing</a></li>
+        <li><a href="#seealso">See Also</a></li>
+        <li><a href="#References">References</a></li>
+        <li><a href="#externallinks">External links</a></li>
+      </ol>
+    </nav>
+  ```
+  #### Label landmarks
+  - TODO -
+
+
+### Performance
+- Slow websites are inaccessible.
+- HTML is parsed linearly. If something blocks rendering early in the document, then subsequent content is delayed.
+- All low priority scripts that can be loaded at the end of body tag should be loaded at the end of body tag and moved out of the head tag. i.e anything that does not belong to head section should be moved oust.
+- Self-Host as many assets as possible. This reduces the number of requests to third party servers.  Risks:
+  -  https://csswizardry.com/2019/05/self-host-your-static-assets/ 
+  - SlowDown/Outages
+  - Security Vulnerabilities
+  - Penalty of Network negotiation
+  - Penalty of Loss of priortisation
+- If self hosting is not an option then, following mitigations can be used:
+  - Preconnect: It tells the browser to start the connection to the server before the request is made. This can reduce the time it takes to make the request.
+  - SRI: Subresource Integrity. It is a security feature that allows you to ensure that the files you include in your page are not tampered with. It is especially useful for third party scripts.
+
+
+  #### Ideal Order of elements in `<head>` tag
+  - Metadata about page goes first
+  - Anything that blocks rendering should goo after `<title>`
+  - CSS blocks the execution of subsequent script, so any synchronous javascript should come before CSS
+  - Avoid using @import in CSS. It blocks the rendering of the page. Instead, use link tag to include CSS.
+  - SEO tags, icons, open graphs, social meta tags, etc. should go at the end.
+  ```html
+  <head>
+    <!-- Character encoding -->
+    <meta charset="UTF-8">
+    <!-- Viewport meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSP headers -->
+    <meta http-equiv="Content-Security-Policy" content="upgrage-insecure-requests">
+    <!-- Page title -->
+    <title>Maya Toys</title>
+    <!-- preconnect -->
+    <link rel="preconnect" href="#" />
+    <!-- Asynchronous JavaScript -->
+    <script src="" async></script>
+    <!-- CSS that includes @import -->
+    <style>
+      @import "file.css";
+    </style>
+    <!-- Synchronous JavaScript -->
+    <script src=""></script>
+    <!-- Synchronous CSS -->
+    <link rel="stylesheet" href="#">
+    <!-- preload -->
+    <link rel="preload" href="#" />
+    <!-- Deferred JavaScript -->
+    <script src="" defer></script>
+    <!-- prefetch / prerender -->
+    <link rel="prefetch" href="#" />
+    <link rel="prerender" href="#" />
+    <!-- Everything else (meta tags, icons, open graphs, etc.) -->
+    <meta name="description" content="">
+  </head>
+  ```
