@@ -50,6 +50,7 @@ Web Accessibility is the practice of ensuring that people with disabilities can 
 - Seizure Disorders: People with epilepsy, people with photosensitive epilepsy.
 - Aging: People with age related disabilities, people with age related impairments.
 
+[^top](#table-of-contents)
 
 ### Tools:
 
@@ -66,6 +67,8 @@ Web Accessibility is the practice of ensuring that people with disabilities can 
 - For Audio and Video, subtitles, captions or transcripts should be provided. Use case: Noisy Places, Deaf people, people with hearing loss, people who are not fluent in the language spoken in the videos.
 - All foreground and background colors should have sufficient contrast, making it easier for people with low vision to read the content.
 - Keyboard/Screen Reader Navigation should be possible.
+
+[^top](#table-of-contents)
 
 ### References
 https://almanac.httparchive.org/en/2022/accessibility
@@ -107,6 +110,8 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
   - Browser may select language specific fonts based on the lang attribute. 
   - SEO: lang attribute could also help search engines understand content better. 
 
+[^top](#table-of-contents)
+
 #### Page Title
 - `<title>` of page must be unique and should describe the content of the page. It is the first thing that screen readers announce when the page is loaded. It is also used by search engines to understand the content of the page.
 - Additionally, opengraph meta tag can be used to include catchier title for social media previews.
@@ -121,6 +126,8 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 - Titles should be unique, concise and should contain relevant information first. For ex: "Website Name: Page Name" is a bad practice. "Page Name - Website Name" is a better practice.
 - Titles should be less than 60 characters. This is because search engines truncate titles longer than 60 characters.
 - Additional context can be provided for example if a page is part of flow, then title could include step number and step description.
+
+[^top](#table-of-contents)
 
 #### Viewport Meta Tag & Low Vision
 - Viewport is the rectangular area in which root element `<html>` is contained.
@@ -141,6 +148,8 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 - Use lists to organize content. It helps to divide text into smaller chunks, and easier for screen readers to skip one line item to another by just reading the first few words of each item.
   - ul - unordered list, screen readers will usually announce "bullet list" or "list of items"
   - ol - ordered list, screen readers will usually announce "numbered list" or "list of items" or the number of list item.
+
+[^top](#table-of-contents)
 
 #### Forms
 - Avoid using Spans and Divs in place of interactive elements like  buttons, links, form elements. Interactive elements carry default accessibility features, which are lost when replaced with non-interactive elements.
@@ -183,6 +192,7 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
   </search>
   ```
 
+[^top](#table-of-contents)
 
 #### Keyboard Shortcuts
   https://www.digitaltrends.com/wp-content/uploads/2022/05/gmail-navigate-keyboard-shortcuts.jpg?fit=720%2C720&p=1
@@ -203,6 +213,8 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 - Because of these inconsistencies, it is better to avoid using tabindex.
 - Using tabindex on non-interactive elements like div/span is a bad practice. It could be confusing for screen readers.
 - Instead of using tabindex, attempt should be made toowards a properly structured HTML. This will ensure that the tab order is logical and consistent with the visual order.
+
+[^top](#table-of-contents)
 
 #### WYSIWYG Editors
 - WYSIWYG editors are used to create content. They are used to create content in a way that is visually appealing. However, they can create accessibility issues. For example, they can create nested tables, which can be difficult to navigate for screen readers. They can also create inaccessible forms. It is important to test the content created by WYSIWYG editors for accessibility.
@@ -231,6 +243,8 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
  #### ARIA Support
   - ARIA is not supported by all screen readers. It is important to test the ARIA roles, states and properties with different screen readers.
   - ARIA won't fix bad HTML. It is not a substitute for good structure. Inherent HTML semantics far outweigh the use of ARIA. ARIA should be used in conjunction with good HTML structure. 
+
+[^top](#table-of-contents)
 
   #### Landmarks
   - Landmarks are roles that help assistive technologies to understand the role of different sections of the page and their relationship to each other. For example, a header, a footer, a main content area, a navigation area, etc.
@@ -305,6 +319,7 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
   #### Label landmarks
   - TODO -
 
+[^top](#table-of-contents)
 
 ### Performance
 - Slow websites are inaccessible.
