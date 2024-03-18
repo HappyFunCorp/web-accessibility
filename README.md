@@ -149,6 +149,26 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
   - ul - unordered list, screen readers will usually announce "bullet list" or "list of items"
   - ol - ordered list, screen readers will usually announce "numbered list" or "list of items" or the number of list item.
 
+#### Section element
+- Section element represents a region on page that groups content on basis of theme.
+- It should start with a heading element (h1-h6) to provide a heading for the section.
+- An unlabelled section is semantically equal to a div. Div is a generic container, section is a thematic container. Example:
+```html
+  <section aria-label="Product Search"> 
+    <h2> Product Search </h2>
+    <!-- Search form/filters -->
+    <!-- Search results -->
+  </section>
+```
+- A div equivalent of this would be:
+```html
+  <div aria-label="Product Search" role="section"> 
+    <h2> Product Search </h2>
+    <!-- Search form/filters -->
+    <!-- Search results -->
+  </div>
+```
+
 [^top](#table-of-contents)
 
 #### Forms
@@ -317,7 +337,32 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
     </nav>
   ```
   #### Label landmarks
-  - TODO -
+  - Landmarks should be labelled properly, so that users can differentiate between them. Elements of same type should be labelled. For example, if there are multiple `<nav>` elements, then they should be labelled as "Main", "Breadcrumb", "Contents", etc. This helps screen reader users to understand the purpose of the landmark.
+  ```html
+    <nav aria-label="Main">
+      ...
+    </nav>
+    <nav aria-label="Page">
+      ...
+    </nav>
+  ```
+  - Landmarks can labelled using `aria-label` (like prev example) or `aria-labelledby` or `aria-describedby`. For example:
+  ```html
+    <nav aria-labelledby="main-nav">
+      ...
+    </nav>
+    <h1 id="main-nav">Main</h1>
+  ```
+  ```html
+    <nav aria-describedby="main-nav">
+      ...
+    </nav>
+    <p id="main-nav">Main</p>
+  ```
+  - For navigations avoid using terms like "Navigation" or "Menu" as it is already conveyed by element's role. 
+  - If there is a useful label already present on page, then use aria-labelledby to reference it. For example, if there is a heading on the page that describes the purpose of the navigation, then use aria-labelledby to reference the heading.
+  - A good label is short, descriptive and unique. It should not be too long. It should not be too generic. It should not be too similar to other labels on the page.
+  - Avoid using visual labels like "Top Navigation", "Left Navigation", etc. These labels are not useful for screen reader users. Instead use context specific labels like "Main", "Breadcrumb", "Contents", etc.
 
 [^top](#table-of-contents)
 
