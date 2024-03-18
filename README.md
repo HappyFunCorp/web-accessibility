@@ -143,11 +143,33 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 
 #### Headings
 - Sensible usage of heading tags to organise content. Heading h1,h2,h3.. describes structure of content to screen readers. Without hierarchy, it would take longer to navigate through the content or locate the desired information.
+- Example:
+```html
+  <h1>Toy Store</h1>
+  <h2>Toys</h2>
+  <h3>Plush Toys</h3>
+  <h3>Wooden Toys</h3>
+  <h3>Electronic Toys</h3>
+  <h3>Oudoor Toys</h3>
+  <h2>Books<h2>
+  <h2>Gift Cards</h2>
+  <h2>Contact Us</h2>
+```
+- Headings are considered as most important elements in establishing the hierarchy of the content. 
+- As per this survey: https://webaim.org/projects/screenreadersurvey10/#finding, 71.6% of screen reader users use headings to navigate the page.
+- Screen readers also allow users to navigate through headings. For example, in NVDA, users can press H to navigate to the next heading, and Shift + H to navigate to the previous heading. 1-6 can be used to navigate to specific level of heading.
+Ins + F7 can be used to list all headings on the page.
+- Sccreen readers announce the heading level along with the heading text. For example, "Heading 1: Toy Store", "Heading 2: Toys", "Heading 3: Plush Toys", etc. Thats why it is important to keep a sane hierarchy of headings.
+h1s tell the user what the page is about, h2s tell the user what the sections are about, h3s tell the user what the subsections are about, and so on.
+- Skipping heading levels is a bad practice. For example, using h3 directly after h1 is a bad practice. It is confusing.
+
 
 #### Lists
 - Use lists to organize content. It helps to divide text into smaller chunks, and easier for screen readers to skip one line item to another by just reading the first few words of each item.
   - ul - unordered list, screen readers will usually announce "bullet list" or "list of items"
   - ol - ordered list, screen readers will usually announce "numbered list" or "list of items" or the number of list item.
+- Screen readers announce the type of list and the number of items in the list. For example, "bullet list with 3 items" or "numbered list with 3 items".
+
 
 #### Section element
 - Section element represents a region on page that groups content on basis of theme.
@@ -169,7 +191,38 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
   </div>
 ```
 
+#### Asides element
+- Asides element represents a section of the page that is tangentially related to the content around it. It is often used for sidebars, pull quotes, glossaries, etc.
+- It should start with a heading element (h1-h6) to provide a heading for the aside.
+- An unlabelled aside is semantically equal to a div. Example:
+```html
+  <aside aria-label="Related Products"> 
+    <h2> Related Products </h2>
+    <!-- List of related products -->
+  </aside>
+```
+- Implicit role of aside is complementary. It is used to provide additional information that is complementary to the main content.
+
+#### Article element
+- Article element represents a self-contained piece of content that could be distributed and reused independently. It could be a blog post, a news article, a forum post, etc.
+- A comment could be a nested article withing a blog post article. Since comment is a self contained piece of content.
+- A Product listed, an interactive widget, a recipe, a blog post, a news article, a forum post, etc. are all examples of articles.
+- It should start with a heading element (h1-h6) to provide a heading for the article.
+- An unlabelled article is semantically equal to a div. So, always try to put meaningfule heading and label for article. Example:
+```html
+  <article aria-label="Blog Post"> 
+    <h2> Blog Post </h2>
+    <!-- Blog content -->
+  </article>
+```
+- There is a wide variety of keyboard shortcut support available in screen readers to navigate through articles. 
+
+
+
 [^top](#table-of-contents)
+
+#### Links vs Buttons
+- TODO - 
 
 #### Forms
 - Avoid using Spans and Divs in place of interactive elements like  buttons, links, form elements. Interactive elements carry default accessibility features, which are lost when replaced with non-interactive elements.
