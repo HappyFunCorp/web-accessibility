@@ -14,6 +14,7 @@
   - [Viewport Meta Tag & Low Vision](#viewport-meta-tag--low-vision)
   - [Headings](#headings)
   - [Lists](#lists)
+  - [Links vs Buttons](#links-vs-buttons)
   - [Forms](#forms)
   - [Keyboard Shortcuts](#keyboard-shortcuts)
   - [Keyboard focus vs Visual focus](#keyboard-focus-vs-visual-focus)
@@ -59,6 +60,7 @@ Web Accessibility is the practice of ensuring that people with disabilities can 
 3. CSS less mode in browser
 4. Screen Readers (Voice Over in Mac)
 5. ct.css is a little diagnostic snippet, named after Computed Tomography (CT) scans, that exposes potential performance issues in your page’s <head> tags, and will disappear as soon as you’ve fixed them. https://csswizardry.com/ct/
+6. [Accessibility features of Next.js](https://nextjs.org/docs/architecture/accessibility)
 
 ### Usability
 - Avoid using technical language/jargon in text. Keep it as simple as possible.
@@ -170,6 +172,75 @@ h1s tell the user what the page is about, h2s tell the user what the sections ar
   - ol - ordered list, screen readers will usually announce "numbered list" or "list of items" or the number of list item.
 - Screen readers announce the type of list and the number of items in the list. For example, "bullet list with 3 items" or "numbered list with 3 items".
 
+#### Links vs Buttons
+- Links should be used to navigate to a different page or a different section of the same page. 
+- Buttons are used to perform an action like form submit or run some Javascript code.
+- `<a>` element has a semantic "link" role which screen readers explicitly announce alongside the text.
+##### About Links:
+- Must read => [Better Link Labels: 4Ss for Encouraging Clicks](https://www.nngroup.com/articles/better-link-labels/)
+- Link's text should communicate clearly to the users what they will find on the target page. For example, "Click here", "Learn more", "Read more", "More info", etc. are bad link texts. They are vague and make it difficult for users to anticipate what they will find if they click it. Such links have [Low Information scent](https://www.nngroup.com/articles/information-scent/) and users are lesss likely to click them.
+- Link label is supposed to be a succinct yet accurate description of what the page is about. If this description feels relevant to the user’s goal, the link will have high information scent for that user and her task, and she will be likely to click it.
+- Avoid using Jargon/Technical words in labels as everyone might not understand them.
+- Summary text along with Link (if any) should be accurate and must convey gist of what the target page contains.
+- The image associated with a link should always be descriptive and representative for the page content or for the category it stands for. Avoid using generic or misleading images.
+- A link is a promise. To function properly, it must set expectations that are not only specific, but also accurate. When links set expectations that aren’t met, they slowly corrode the user’s trust in the site and the organization it represents. Wasted clicks rapidly make users cut their click budget for your site or even leave your site.
+- [Majority of web users scan instead of reading](https://www.nngroup.com/articles/why-web-users-scan-instead-reading/) through the page entirely. Research shows that links styled differently than static text around it are likely to draw more attention. So, Links should be styled differenly than regular text. And their label should be sufficient to explain the target page without the need to read the supporting/surrounding text (because there is high probablilty that users would not read that).
+- Imagine a screen reader announcing "Click here, link" to a user having vision disability. Without any context it is not possible to determine where that link would take the user and/or if it would fulfill the objective in user's mind.
+- Must read => [Creating a perfect link](https://www.a11y-collective.com/blog/the-perfect-link/#h-click-here)
+
+##### About Buttons:
+- `<button>Toggle Picture</button>` element has implicit ARIA button role. So, its best to use this element for a button. Screen readers annouce button role along with the text. Ex: "Toggle Picture, button".
+- Label/text for a button must be present and must be accurate (not misleading) so that screen readers can announce their purpose.
+- In following case, label for button is coming from "alt" text of image:
+  ```html
+  <button type="button"> 
+    <img src="/images/download.svg" alt="Download" width="26">
+  </button>
+  ```
+- If you want to hide image from accessibility tree, use "aria-hidden" = true or remove "alt" text of the image:
+  ```html
+    <button type="button">
+      Save
+      <img src="/images/download.svg" alt="" width="26">
+    </button>
+    <!-- OR --> 
+    <button type="button">
+      Save
+      <svg aria-hidden="true" viewBox="0 0 39 44" width="26">
+        <path d="M19.5 36.5 1.6 26.1v-3.6l16.3 9.4V1.5h3.2v30.4l16.3-9.4v3.6z"/>
+        <path d="M1 41.5h37" style="stroke:#000;stroke-width:3;"/>
+      </svg>
+    </button>
+  ```
+- If you have just icon as button, then you can hide the label via CSS (or use aria-label) and remove alt text so that it works for both visual and reader mode.
+- If you have a button with just an icon, then you can use aria-label to provide a label for the button. For example:
+  ```html
+    <button type="button" aria-label="Download">
+      <img src="/images/download.svg" alt="" width="26">
+    </button>
+    <!-- OR -->
+    <button type="button">
+      <span class="visually-hidden">Download</span>
+      <img src="/images/download.svg" alt="" width="26">
+    </button>
+  ```
+- If you don't want `<button>` to look like a button, then remove its default properties using CSS. One of the most common accessibility issues on most websites is fake buttons created using divs/images. 
+  ```css
+  button {
+    background: none;
+    border: 0.1em solid transparent; 1
+    font: inherit;
+    padding: 0;
+  }
+  ```
+- Many developers assume that if a control doesn’t look like a button, it doesn’t have to be a `<button>` element. Their reasoning is: If there are no button styles in the first place, you don’t have to remove them.
+- Fake buttons lack keyboard focus, and they don’t announce themselves as buttons to screen readers. This makes them inaccessible to keyboard and screen reader users.
+Space and Enter keys are the most common keys used to activate buttons. If a control doesn’t have keyboard focus, it can’t be activated using these keys. 
+- When a button is used to control state of other elements on page, for example button opening/closing a nav, then use `aria-expanded=true/false` to communicate if nav is visible. Using JS, toggle the state of attribute so that it can be announced appropriately. 
+- Other example properties that communicate state or association with other element: aria-haspopup, aria-checked, aria-pressed
+
+
+
 
 #### Section element
 - Section element represents a region on page that groups content on basis of theme.
@@ -220,9 +291,6 @@ h1s tell the user what the page is about, h2s tell the user what the sections ar
 
 
 [^top](#table-of-contents)
-
-#### Links vs Buttons
-- TODO - 
 
 #### Forms
 - Avoid using Spans and Divs in place of interactive elements like  buttons, links, form elements. Interactive elements carry default accessibility features, which are lost when replaced with non-interactive elements.
