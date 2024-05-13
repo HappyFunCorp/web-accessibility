@@ -61,6 +61,7 @@ Web Accessibility is the practice of ensuring that people with disabilities can 
 4. Screen Readers (Voice Over in Mac)
 5. ct.css is a little diagnostic snippet, named after Computed Tomography (CT) scans, that exposes potential performance issues in your page’s <head> tags, and will disappear as soon as you’ve fixed them. https://csswizardry.com/ct/
 6. [Accessibility features of Next.js](https://nextjs.org/docs/architecture/accessibility)
+7. [Log A11y Error on Browser Console on Next.js/React.JS](https://www.npmjs.com/package/@axe-core/react)
 
 ### Usability
 - Avoid using technical language/jargon in text. Keep it as simple as possible.
