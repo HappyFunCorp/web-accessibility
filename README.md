@@ -292,16 +292,50 @@ Space and Enter keys are the most common keys used to activate buttons. If a con
 
 [^top](#table-of-contents)
 
+#### Tables
+- Use tables for tabular data (and not for layout).
+- https://inclusive-components.design/data-tables/
+- https://adrianroselli.com/2021/04/sortable-table-columns.html
+- See [Exploring A Data Table with Safari and Voiceover](https://www.youtube.com/watch?v=tlpQ0d2ADNo)
+
+### Custom Elements and Shadow DOM
+- Light DOM vs Shadow DOM: Light DOM is the default DOM that is rendered by the browser. Shadow DOM is a separate DOM that is attached to the light DOM. It is used to encapsulate the styles and behavior of the custom element. It is not accessible to the light DOM. It is used to create custom elements that are reusable and encapsulated.
+- Do not mix light DOM and shadow DOM contexts. For example: a label and associated input should be in the same context. If they are in different contexts, then screen readers will not be able to associate the label with the input.
+- https://nolanlawson.com/2022/11/28/shadow-dom-and-accessibility-the-trouble-with-aria/
+- https://alice.pages.igalia.com/blog/how-shadow-dom-and-accessibility-are-in-conflict/
+
+
+
 #### Forms
-- Avoid using Spans and Divs in place of interactive elements like  buttons, links, form elements. Interactive elements carry default accessibility features, which are lost when replaced with non-interactive elements.
+- Avoid using Spans and Divs in place of interactive elements like  buttons, links, form elements. Interactive elements carry default accessibility features, which are lost when replaced with non-interactive elements. For example, making a diive look like button would take just CSS. But making it behave or as accessible as a button would require: button role, would need to be focusable, focus styles, keyup/down event listeners. This is a lot of extra work, so why not use native button element which has all this built-in.
 - **Input elements** like text fields, radio buttons, checkboxes, and select menus carry default accessibility features. For example: When a radio button is focused, screen readers will announce the radio button's label and its state (checked or unchecked).
 - **Labels** are important for screen readers. They provide context to the form element. When a form element is focused, screen readers will announce the label. If the label is missing, screen readers will announce the placeholder attribute value. 
+  - Labels should be placed above inputs (instead of left) https://www.uxmatters.com/mt/archives/2006/07/label-placement-in-forms.php
+  - Avoid placeholders https://www.nngroup.com/articles/form-design-placeholders/
+  - Instead of placeholders, give inline instructions within label or right after input elements.
+- **Autocomplete**
+  - https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls:-the-autocomplete-attribute
+  - Wherever possible and makes sense, do use autocmoplete attribute to help people with memory and motor disabilities.
+
 - **Required fields** If an input field is required, then label should clearly indicate that the field is required. Simply putting an asterisks (*) might not be enough for screen readers.
+- aria-invalid="true" can be used to indicate that the input is invalid. Screen readers will announce that the input is invalid. aria-describedby can be used to provide a description of the error. https://www.smashingmagazine.com/2023/02/guide-accessible-form-validation/
+
 - Label and Input should be associated using `for` attribute in label and `id` attribute in input. This helps screen readers to announce the label when input is focused. Example:
   ```html
   <label for="username">Username (required)</label>
   <input type="text" id="username" name="username">
   ```
+- Use fieldset and legend to group related elements together. Screen readers would announce the legend when the fieldset is focused. Example:
+  ```html
+  <fieldset>
+    <legend>Shipping Address</legend>
+    <label for="name">Name (required)</label>
+    <input type="text" id="name" name="name">
+    <label for="address">Address (required)</label>
+    <input type="text" id="address" name="address">
+  </fieldset>
+  ```
+  
 - Certain inputs like radio buttons have very small interaction area. Pairing the input with the label increases the interaction area. It reduces the chances of selecting the wrong input. Increasing the interactive area helps people with motor disabilities, where they might have difficulty in clicking on small areas.
 - Important forms on page should be promoted as landmarks. This helps screen reader users to jump to the form directly. Examples: 
 - Login form:
@@ -332,6 +366,7 @@ Space and Enter keys are the most common keys used to activate buttons. If a con
     </form>
   </search>
   ```
+- Using appropriate input field (textarea, input [email, text, url, tel]) depending on input type, would enable appropriate keyboard layout on mobiles.
 
 [^top](#table-of-contents)
 
