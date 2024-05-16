@@ -62,6 +62,13 @@ Web Accessibility is the practice of ensuring that people with disabilities can 
 5. ct.css is a little diagnostic snippet, named after Computed Tomography (CT) scans, that exposes potential performance issues in your page’s <head> tags, and will disappear as soon as you’ve fixed them. https://csswizardry.com/ct/
 6. [Accessibility features of Next.js](https://nextjs.org/docs/architecture/accessibility)
 7. [Log A11y Error on Browser Console on Next.js/React.JS](https://www.npmjs.com/package/@axe-core/react)
+8. [Axe accessibility testing tools](https://www.deque.com/axe/)
+9. [Google Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
+10.[ARC Toolkit](https://www.tpgi.com/arc-platform/arc-toolkit/)
+11. [IBM Accessibility Checker NodeJS](https://www.npmjs.com/package/accessibility-checker)
+12. [IBM Accessibility Checker Tools](https://www.ibm.com/able/toolkit/verify/automated/)
+
+
 
 ### Usability
 - Avoid using technical language/jargon in text. Keep it as simple as possible.
