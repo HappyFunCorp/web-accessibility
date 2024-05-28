@@ -67,7 +67,8 @@ Web Accessibility is the practice of ensuring that people with disabilities can 
 10.[ARC Toolkit](https://www.tpgi.com/arc-platform/arc-toolkit/)
 11. [IBM Accessibility Checker NodeJS](https://www.npmjs.com/package/accessibility-checker)
 12. [IBM Accessibility Checker Tools](https://www.ibm.com/able/toolkit/verify/automated/)
-
+13. Emulators provided by rendering tab in Chrome DevTools. For example: 
+- #### Blurred Vision Emulator: ![Blurred Vision Emulator](https://github.com/HappyFunCorp/web-accessibility/blob/main/images/blurred-vision-emulator.png?raw=true)
 
 
 ### Usability
@@ -76,7 +77,7 @@ Web Accessibility is the practice of ensuring that people with disabilities can 
 - Character sets and Fonts should be chosen so that they contain all the characters that are used in the language.
 - For Audio and Video, subtitles, captions or transcripts should be provided. Use case: Noisy Places, Deaf people, people with hearing loss, people who are not fluent in the language spoken in the videos.
 - All foreground and background colors should have sufficient contrast, making it easier for people with low vision to read the content.
-- Keyboard/Screen Reader Navigation should be possible.
+- Keyboard/Screen Reader Navigation should be possible. 
 
 [^top](#table-of-contents)
 
