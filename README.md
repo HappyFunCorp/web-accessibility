@@ -122,7 +122,7 @@ Some key aspects of WCAG include:
 
 Captions and transcripts for audio and video content: This makes audio and video content accessible to people with hearing disabilities:
 
-- Videos should have cc and a transcript
+- Videos should have closed captions and a transcript
 - If videos have a play/pause toggle button the aria-label should be updated and describe the video being played/paused
 
 **Keyboard accessibility**: This ensures that people who cannot use a mouse can still navigate and use web content.   
