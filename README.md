@@ -1,37 +1,53 @@
 ## Web Accessibility
 ## Table of Contents
-- [Introduction](#introduction)
-- [Why Web Accessibility](#why-web-accessibility)
-- [Types of Disabilities](#types-of-disabilities)
-- [Tools](#tools)
-- [Usability](#usability)
-- [References](#references)
-- [ADA](#ada)
-- [ARIA](#aria)
-- [HTML](#html)
-  - [Lang attribute](#lang-attribute)
-  - [Page Title](#page-title)
-  - [Viewport Meta Tag & Low Vision](#viewport-meta-tag--low-vision)
-  - [Headings](#headings)
-  - [Lists](#lists)
-  - [Links vs Buttons](#links-vs-buttons)
-  - [Forms](#forms)
-  - [Keyboard Shortcuts](#keyboard-shortcuts)
-  - [Keyboard focus vs Visual focus](#keyboard-focus-vs-visual-focus)
-  - [Focus and Hover Styles](#focus-and-hover-styles)
-  - [Tab Index](#tab-index)
-  - [WYSIWYG Editors](#wysiwyg-editors)
-  - [Web Accessibility Initiative—Accessible Rich Internet Applications (WAI-ARIA)](#web-accessibility-initiativeaccessible-rich-internet-applications-wai-aria)
+- [Web Accessibility](#web-accessibility)
+- [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Why Web Accessibility](#why-web-accessibility)
+  - [Types of Disabilities](#types-of-disabilities)
+  - [Tools:](#tools)
+  - [Usability](#usability)
+  - [Standards and Regulations](#standards-and-regulations)
+    - [WCAG](#wcag)
+    - [Eurepean Accessibility Act](#eurepean-accessibility-act)
+  - [References](#references)
+  - [ADA](#ada)
+  - [ARIA](#aria)
+  - [HTML](#html)
+    - [Lang attribute](#lang-attribute)
+    - [Page Title](#page-title)
+    - [Viewport Meta Tag \& Low Vision](#viewport-meta-tag--low-vision)
+    - [Headings](#headings)
+    - [Lists](#lists)
+    - [Links vs Buttons](#links-vs-buttons)
+      - [About Links:](#about-links)
+      - [About Buttons:](#about-buttons)
+    - [Section element](#section-element)
+    - [Asides element](#asides-element)
+    - [Article element](#article-element)
+    - [Tables](#tables)
+    - [Carousels (Slideshows)](#carousels-slideshows)
+    - [Tabs](#tabs)
+    - [Embedding Videos](#embedding-videos)
+  - [Custom Elements and Shadow DOM](#custom-elements-and-shadow-dom)
+    - [Forms](#forms)
+    - [Keyboard Shortcuts](#keyboard-shortcuts)
+    - [Keyboard focus vs Visual focus](#keyboard-focus-vs-visual-focus)
+    - [Focus and Hover Styles](#focus-and-hover-styles)
+    - [Tab Index](#tab-index)
+    - [WYSIWYG Editors](#wysiwyg-editors)
+    - [Web Accessibility Initiative—Accessible Rich Internet Applications (WAI-ARIA)](#web-accessibility-initiativeaccessible-rich-internet-applications-wai-aria)
     - [Roles](#roles)
     - [States and Properties](#states-and-properties)
     - [Live Regions](#live-regions)
     - [ARIA Support](#aria-support)
     - [Landmarks](#landmarks)
-      - [Main Navigation Landmark Example:](#main-navigation-landmark-example)
-      - [Breadcrumb Navigation Example:](#breadcrumb-navigation-example)
-      - [Local Navigation Example:](#local-navigation-example)
-      - [Label landmarks](#label-landmarks)
-- [Performance](#performance)
+    - [Main Navigation Landmark Example:](#main-navigation-landmark-example)
+    - [Breadcrumb Navigation Example:](#breadcrumb-navigation-example)
+    - [Local Navigation Example:](#local-navigation-example)
+    - [Label landmarks](#label-landmarks)
+  - [Performance](#performance)
+    - [Ideal Order of elements in `<head>` tag ^](#ideal-order-of-elements-in-head-tag-)
 
 ### Introduction
 Web Accessibility is the practice of ensuring that people with disabilities can perceive, understand, navigate, and interact with the web. It is about making the web accessible to everyone, regardless of their abilities. It is about making the web inclusive.
@@ -78,6 +94,59 @@ Web Accessibility is the practice of ensuring that people with disabilities can 
 - For Audio and Video, subtitles, captions or transcripts should be provided. Use case: Noisy Places, Deaf people, people with hearing loss, people who are not fluent in the language spoken in the videos.
 - All foreground and background colors should have sufficient contrast, making it easier for people with low vision to read the content.
 - Keyboard/Screen Reader Navigation should be possible. 
+
+### Standards and Regulations
+
+#### WCAG
+The Web Content Accessibility Guidelines (WCAG) are a set of international standards that define how to make web content more accessible to people with disabilities. They are developed by the World Wide Web Consortium (W3C).   
+
+WCAG covers a wide range of disabilities, including visual, auditory, physical, speech, cognitive, language, learning, and neurological disabilities.   
+
+The guidelines are based on four principles, often referred to by the acronym POUR:   
+
+<ins>Perceivable</ins>: Information and user interface components must be presentable to users in ways they can perceive.   
+
+<ins>Operable</ins>: User interface components and navigation must be operable.   
+
+<ins>Understandable</ins>: User interface and information must be understandable.   
+
+<ins>Robust</ins>: Content must be robust enough that it can be interpreted reliably by a wide variety of user agents, including assistive technologies.   
+
+WCAG has three levels of conformance: A, AA, and AAA. Level A is the minimum level of conformance, while AAA is the highest.   
+
+WCAG is important because it helps to ensure that people with disabilities have equal access to web content. It also helps to improve the usability of web content for everyone.
+
+Some key aspects of WCAG include:
+
+**Text alternatives** for non-text content: This includes images, videos, and audio content.   
+
+Captions and transcripts for audio and video content: This makes audio and video content accessible to people with hearing disabilities:
+
+- Videos should have closed captions and a transcript
+- If videos have a play/pause toggle button the aria-label should be updated and describe the video being played/paused
+
+**Keyboard accessibility**: This ensures that people who cannot use a mouse can still navigate and use web content.   
+- No keyboard traps: the tab navigation should never get blocked by an element "trapping" the navigation shortcuts. 
+
+**Sufficient color contrast**: This makes it easier for people with low vision to read text and see images.   
+Clear and consistent navigation: This makes it easier for everyone to find their way around a website.
+
+WCAG 1.0: This was the original version, released in 1999. It primarily focused on HTML and is no longer recommended for use.
+
+WCAG 2.0: Released in 2008, this version introduced the POUR principles (Perceivable, Operable, Understandable, and Robust) and provided more technology-agnostic guidelines.
+
+WCAG 2.1: This version, released in 2018, built upon WCAG 2.0 and addressed the growing use of mobile devices and assistive technologies. It included new success criteria to improve accessibility for people with low vision, cognitive, and learning disabilities.
+
+WCAG 2.2: The latest version, released in 2023, adds further success criteria to improve accessibility for people with cognitive, low vision, and motor disabilities.
+
+References: 
+
+[WCAG Checklist](https://webaim.org/standards/wcag/checklist)
+[WCAG Cheatsheet](https://bitsofco.de/the-accessibility-cheatsheet/)
+
+#### Eurepean Accessibility Act
+
+The European Accessibility Act (EAA) is impacting digital accessibility in Europe effective early 2025. While not explicitly requested it is safe to say that organizations will need to comply with WCAG (likely 2.1 or later) to meet the EAA requirements.
 
 [^top](#table-of-contents)
 
@@ -249,8 +318,6 @@ Space and Enter keys are the most common keys used to activate buttons. If a con
 - Other example properties that communicate state or association with other element: aria-haspopup, aria-checked, aria-pressed
 
 
-
-
 #### Section element
 - Section element represents a region on page that groups content on basis of theme.
 - It should start with a heading element (h1-h6) to provide a heading for the section.
@@ -306,6 +373,148 @@ Space and Enter keys are the most common keys used to activate buttons. If a con
 - https://inclusive-components.design/data-tables/
 - https://adrianroselli.com/2021/04/sortable-table-columns.html
 - See [Exploring A Data Table with Safari and Voiceover](https://www.youtube.com/watch?v=tlpQ0d2ADNo)
+
+#### Carousels (Slideshows)
+
+- Avoid Auto-play: User-initiated navigation is preferred.
+- Clear Controls: Visible and keyboard accessible.
+- Semantic HTML: Use appropriate elements.
+- Alt Text for Images: Descriptive alt text.
+- ARIA Attributes: Enhance accessibility for assistive technologies.
+- Testing: Essential with assistive technologies.
+
+Example: 
+
+```html
+<div class="slideshow" aria-live="polite">  <div class="slides-container">
+    <div class="slide" aria-hidden="false">  <img src="image1.jpg" alt="Descriptive alt text for image 1">
+      <div class="slide-content">
+        <h2>Slide 1 Title</h2>
+        <p>Content for slide 1.</p>
+      </div>
+    </div>
+    <div class="slide" aria-hidden="true">  <img src="image2.jpg" alt="Descriptive alt text for image 2">
+      <div class="slide-content">
+        <h2>Slide 2 Title</h2>
+        <p>Content for slide 2.</p>
+      </div>
+    </div>
+    </div>
+
+  <button class="prev-slide" aria-label="Previous Slide">Previous</button>
+  <button class="next-slide" aria-label="Next Slide">Next</button>
+
+  <div class="slide-controls">  <button aria-label="Go to slide 1"></button>
+    <button aria-label="Go to slide 2"></button>
+    </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let currentSlide = 0;
+
+  function showSlide(n) {
+    // ... logic to hide/show slides, update aria-hidden, etc.
+  }
+
+  // Event listeners for prev/next buttons, keyboard navigation, etc.
+</script>
+```
+
+#### Tabs
+
+- Semantic HTML: Use appropriate elements (e.g., ```<ul>```, ```<li>``` for tabs).
+- ARIA Attributes: Essential for conveying the tab structure and state to assistive technologies.
+- Keyboard Interactions: Define clear keyboard interactions (Tab, Arrow keys, Enter/Space).
+- Focus Management: Control where the keyboard focus goes after a tab is activated.
+- Clear Visuals: Use CSS to style the active tab differently.
+- Testing: Absolutely crucial with screen readers and keyboard-only navigation.
+  
+
+Example: 
+
+```html
+<div class="tabs">
+  <ul role="tablist" aria-label="Tab Example">
+    <li role="presentation">
+      <button role="tab" id="tab1" aria-controls="panel1" aria-selected="true" tabindex="0">Tab 1</button>
+    </li>
+    <li role="presentation">
+      <button role="tab" id="tab2" aria-controls="panel2" aria-selected="false" tabindex="-1">Tab 2</button>
+    </li>
+    </ul>
+
+  <div id="panel1" role="tabpanel" aria-labelledby="tab1" tabindex="0">
+    <h2>Content for Tab 1</h2>
+    <p>Descriptive content for tab 1.</p>
+  </div>
+  <div id="panel2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" tabindex="0">
+    <h2>Content for Tab 2</h2>
+    <p>Descriptive content for tab 2.</p>
+  </div>
+  </div>
+
+<script>
+  // JavaScript to handle tab switching, ARIA updates, keyboard navigation, etc.
+
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+
+  tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+          activateTab(tab);
+      });
+
+      tab.addEventListener('keydown', (e) => {
+          handleKeyboardNavigation(e, tab);
+      });
+  });
+
+  function activateTab(selectedTab){
+    tabs.forEach(tab => {
+        tab.setAttribute('aria-selected', tab === selectedTab);
+        tab.setAttribute('tabindex', tab === selectedTab ? '0' : '-1');
+    });
+
+    panels.forEach(panel => {
+        const tabId = panel.getAttribute('aria-labelledby');
+        panel.setAttribute('aria-hidden', tabId !== selectedTab.id);
+    });
+  }
+
+  function handleKeyboardNavigation(e, currentTab){
+      // ... logic for arrow key navigation, Enter/Space activation
+  }
+
+</script>
+```
+
+#### Embedding Videos
+
+- Captions/Subtitles: Use accurate, synchronized captions. WebVTT is the preferred format.
+- Transcripts: Provide a text transcript of the video's audio.
+- Audio Descriptions: Include audio descriptions of important visual information. These can be embedded in the video itself or provided as a separate track.
+- Keyboard-Accessible Player: Use a video player that is fully keyboard accessible. Many standard video players have built-in accessibility features.
+- Avoid Auto-play: Don't auto-play videos unless absolutely necessary. If you must, provide a clear and easily accessible way to stop the playback.
+- Provide Controls: Ensure all necessary controls (play/pause, volume, fullscreen, etc.) are available and keyboard accessible.
+- Descriptive Text: Provide descriptive text around the video embed to give context.
+
+Example:
+
+```html
+<div class="video-container">
+  <video controls poster="video-poster.jpg">
+    <source src="video.mp4" type="video/mp4">
+    <source src="video.webm" type="video/webm">
+    <track src="captions.vtt" kind="captions" srclang="en" label="English Captions">
+    Your browser does not support the video tag.
+  </video>
+  <div class="video-description">
+    <h2>Video Title</h2>
+    <p>Descriptive text about the video content.</p>
+    <a href="transcript.txt">Transcript</a>  </div>
+</div>
+```
 
 ### Custom Elements and Shadow DOM
 - Light DOM vs Shadow DOM: Light DOM is the default DOM that is rendered by the browser. Shadow DOM is a separate DOM that is attached to the light DOM. It is used to encapsulate the styles and behavior of the custom element. It is not accessible to the light DOM. It is used to create custom elements that are reusable and encapsulated.
@@ -528,6 +737,17 @@ Space and Enter keys are the most common keys used to activate buttons. If a con
   - If there is a useful label already present on page, then use aria-labelledby to reference it. For example, if there is a heading on the page that describes the purpose of the navigation, then use aria-labelledby to reference the heading.
   - A good label is short, descriptive and unique. It should not be too long. It should not be too generic. It should not be too similar to other labels on the page.
   - Avoid using visual labels like "Top Navigation", "Left Navigation", etc. These labels are not useful for screen reader users. Instead use context specific labels like "Main", "Breadcrumb", "Contents", etc.
+
+  - Navigation should ideally contain a "Skip to Content" Link. This will appear if the "tab" key is pressed to navigate the website with a keyboard and allows the user to directly go to the main page content without having to go through other elements. 
+  
+  ```html
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  ```
+
+  The link should be hidden if not focused and can be focused by being the first link in the header navigation for example. This way only navigating with a keyboard will make the link visible and usable, while mouse users will not even notice it is present.
+
+  [How to create a "Skip to Content" Link](https://css-tricks.com/how-to-create-a-skip-to-content-link/)
+
 
 [^top](#table-of-contents)
 
